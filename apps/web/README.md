@@ -1,6 +1,6 @@
-# Hari Handika Portfolio Web
+# Hari Handika Setiawan Portfolio Web
 
-Next.js frontend foundation for the Hari Handika portfolio application.
+Next.js frontend foundation for the Hari Handika Setiawan portfolio application.
 
 This step only prepares the frontend foundation. Public pages, admin pages, data fetching screens, and form workflows are intentionally not implemented yet.
 

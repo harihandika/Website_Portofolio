@@ -1,6 +1,6 @@
-# Hari Handika Personal Portfolio Website
+# Hari Handika Setiawan Personal Portfolio Website
 
-Panduan ini menjelaskan cara menggunakan, menjalankan, melakukan migrasi database Prisma, dan mengisi data awal untuk aplikasi portfolio Hari Handika.
+Panduan ini menjelaskan cara menggunakan, menjalankan, melakukan migrasi database Prisma, dan mengisi data awal untuk aplikasi portfolio Hari Handika Setiawan.
 
 ## Ringkasan Aplikasi
 
@@ -287,7 +287,7 @@ Model database yang dibuat melalui Prisma migration:
    - Table: `users`.
 
 2. `Profile`
-   - Data personal Hari Handika.
+   - Data personal Hari Handika Setiawan.
    - Kolom utama: `fullName`, `headline`, `bio`, `email`, `phone`, `location`, `githubUrl`, `linkedinUrl`, `cvUrl`, `photoUrl`.
    - Table: `profiles`.
 
@@ -345,7 +345,7 @@ Data yang diisi oleh seed:
 - Projects:
   - ProcureFlow ERP.
   - Transfer Request Portal.
-  - Hari Handika Portfolio.
+  - Hari Handika Setiawan Portfolio.
 
 - Skills:
   - Frontend: Next.js, React, Tailwind CSS, Framer Motion.

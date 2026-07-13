@@ -1,9 +1,10 @@
-import { PublicLayout } from '@/components/layout/public-layout';
-import './globals.css';
+import { PublicLayout } from "@/components/layout/public-layout";
+import "./globals.css";
 
 export const metadata = {
-  title: 'Hari Handika',
-  description: 'Personal portfolio and interactive CV for Hari Handika.',
+  title: "Hari Handika Setiawan",
+  description:
+    "Personal portfolio and interactive CV for Hari Handika Setiawan.",
 };
 
 export default function RootLayout({

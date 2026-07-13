@@ -1,6 +1,6 @@
 # Portfolio Database
 
-This folder contains the Prisma database design for the Hari Handika portfolio application.
+This folder contains the Prisma database design for the Hari Handika Setiawan portfolio application.
 
 ## Environment
 

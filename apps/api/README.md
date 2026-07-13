@@ -1,6 +1,6 @@
-# Hari Handika Portfolio API
+# Hari Handika Setiawan Portfolio API
 
-NestJS backend foundation for the Hari Handika portfolio application.
+NestJS backend foundation for the Hari Handika Setiawan portfolio application.
 
 This step only prepares the backend foundation. Business modules such as auth, profile, projects, skills, experiences, and contact are intentionally not implemented yet.
 

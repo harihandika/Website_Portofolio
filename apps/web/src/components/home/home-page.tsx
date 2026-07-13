@@ -1,36 +1,58 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Download, Mail, MapPin, Sparkles } from 'lucide-react';
-import { AboutSection } from '@/components/sections/about-section';
-import { ExperienceSection } from '@/components/sections/experience-section';
-import { SkillsSection } from '@/components/sections/skills-section';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Container } from '@/components/layout/container';
-import { SectionTitle } from '@/components/layout/section-title';
-import type { ExperienceData, ProfileData, SkillCategoryData } from '@/lib/data/portfolio';
-import { cardHover, fadeUp, staggerContainer } from '@/lib/motion';
+import { Container } from "@/components/layout/container";
+import { SectionTitle } from "@/components/layout/section-title";
+import { AboutSection } from "@/components/sections/about-section";
+import { ExperienceSection } from "@/components/sections/experience-section";
+import { SkillsSection } from "@/components/sections/skills-section";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import type {
+  ExperienceData,
+  ProfileData,
+  SkillCategoryData,
+} from "@/lib/data/portfolio";
+import { cardHover, fadeUp, staggerContainer } from "@/lib/motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Download, Mail, MapPin, Sparkles } from "lucide-react";
+import Link from "next/link";
 
-const techStacks = ['Next.js', 'NestJS', 'TypeScript', 'Prisma', 'PostgreSQL', 'Railway', 'Vercel', 'JWT'];
+const techStacks = [
+  "Next.js",
+  "NestJS",
+  "TypeScript",
+  "Prisma",
+  "PostgreSQL",
+  "Railway",
+  "Vercel",
+  "JWT",
+];
 
 const featuredProjects = [
   {
-    title: 'ProcureFlow ERP',
-    summary: 'Procurement workflow platform with approvals, budget control, receiving, and ERP sync simulation.',
-    stacks: ['Next.js', 'NestJS', 'Prisma'],
+    title: "ProcureFlow ERP",
+    summary:
+      "Procurement workflow platform with approvals, budget control, receiving, and ERP sync simulation.",
+    stacks: ["Next.js", "NestJS", "Prisma"],
   },
   {
-    title: 'Transfer Request Portal',
-    summary: 'Operational application for material transfer requests, interplant schedules, and reporting flows.',
-    stacks: ['Backend', 'Database', 'Workflow'],
+    title: "Transfer Request Portal",
+    summary:
+      "Operational application for material transfer requests, interplant schedules, and reporting flows.",
+    stacks: ["Backend", "Database", "Workflow"],
   },
   {
-    title: 'Portfolio CMS',
-    summary: 'Admin-managed portfolio system with profile, projects, skills, experiences, and contact messages.',
-    stacks: ['JWT', 'PostgreSQL', 'API'],
+    title: "Portfolio CMS",
+    summary:
+      "Admin-managed portfolio system with profile, projects, skills, experiences, and contact messages.",
+    stacks: ["JWT", "PostgreSQL", "API"],
   },
 ];
 
@@ -49,7 +71,11 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
         <div className="animated-gradient absolute inset-0 -z-10" />
         <div className="surface-grid absolute inset-0 -z-10 opacity-50" />
         <Container className="grid min-h-[calc(100vh-4rem)] items-center gap-12 py-20 lg:grid-cols-[1.12fr_0.88fr] lg:py-28">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.div
               variants={fadeUp}
               className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-sm text-primary"
@@ -61,13 +87,21 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
               variants={fadeUp}
               className="text-balance text-4xl font-semibold leading-tight text-foreground sm:text-5xl lg:text-6xl"
             >
-              Full Stack Developer focused on Backend, System Integration, and Scalable Web Applications
+              Full Stack Developer focused on Backend, System Integration, and
+              Scalable Web Applications
             </motion.h1>
-            <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-              I build clean, maintainable, and business-oriented applications using Next.js, NestJS, Prisma,
-              PostgreSQL, and modern cloud deployment.
+            <motion.p
+              variants={fadeUp}
+              className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg"
+            >
+              I build clean, maintainable, and business-oriented applications
+              using Next.js, NestJS, Prisma, PostgreSQL, and modern cloud
+              deployment.
             </motion.p>
-            <motion.div variants={staggerContainer} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <motion.div
+              variants={staggerContainer}
+              className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            >
               <motion.div variants={fadeUp}>
                 <Button asChild size="lg">
                   <Link href="/projects">
@@ -78,7 +112,12 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
               </motion.div>
               <motion.div variants={fadeUp}>
                 <Button asChild size="lg" variant="outline">
-                  <Link href={profile.cvUrl ?? '/cv.pdf'} target="_blank">
+                  <Link
+                    href={
+                      profile.cvUrl ?? "/assets/CV Hari_Handika_Setiawan.pdf"
+                    }
+                    target="_blank"
+                  >
                     <Download className="h-4 w-4" />
                     Download CV
                   </Link>
@@ -103,7 +142,7 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
           >
             <motion.div
               animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="rounded-lg border border-primary/25 bg-card/90 p-5 shadow-[0_22px_80px_hsl(222_36%_4%/0.42)] backdrop-blur"
             >
               <div className="flex items-start gap-4">
@@ -111,8 +150,12 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
                   HH
                 </div>
                 <div>
-                  <p className="text-lg font-semibold text-foreground">{profile.fullName}</p>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{profile.headline}</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {profile.fullName}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    {profile.headline}
+                  </p>
                 </div>
               </div>
               <div className="mt-5 grid grid-cols-2 gap-3">
@@ -123,13 +166,28 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
               </div>
               <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" />
-                {profile.location ?? 'Indonesia / Remote'}
+                {profile.location ?? "Indonesia / Remote"}
               </div>
             </motion.div>
 
-            <FloatingBadge className="-left-3 top-8" delay={0} label="NestJS" reduceMotion={reduceMotion} />
-            <FloatingBadge className="-right-2 top-28" delay={0.8} label="Prisma" reduceMotion={reduceMotion} />
-            <FloatingBadge className="bottom-10 left-4" delay={1.4} label="PostgreSQL" reduceMotion={reduceMotion} />
+            <FloatingBadge
+              className="-left-3 top-8"
+              delay={0}
+              label="NestJS"
+              reduceMotion={reduceMotion}
+            />
+            <FloatingBadge
+              className="-right-2 top-28"
+              delay={0.8}
+              label="Prisma"
+              reduceMotion={reduceMotion}
+            />
+            <FloatingBadge
+              className="bottom-10 left-4"
+              delay={1.4}
+              label="PostgreSQL"
+              reduceMotion={reduceMotion}
+            />
           </motion.div>
         </Container>
       </section>
@@ -162,7 +220,10 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
           />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {featuredProjects.map((project) => (
-              <motion.div key={project.title} whileHover={reduceMotion ? undefined : cardHover}>
+              <motion.div
+                key={project.title}
+                whileHover={reduceMotion ? undefined : cardHover}
+              >
                 <Card className="h-full transition-all duration-300 hover:border-primary/35 hover:shadow-[0_22px_70px_hsl(var(--primary)/0.13)]">
                   <CardHeader>
                     <CardTitle>{project.title}</CardTitle>
@@ -190,13 +251,17 @@ export function HomePage({ profile, skills, experiences }: HomePageProps) {
           <Card className="overflow-hidden">
             <div className="animated-gradient border-b border-border/70 px-6 py-12 sm:px-10">
               <div className="max-w-3xl">
-                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Contact</p>
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                  Contact
+                </p>
                 <h2 className="text-balance text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
-                  Need a developer who can connect product thinking with backend execution?
+                  Need a developer who can connect product thinking with backend
+                  execution?
                 </h2>
                 <p className="mt-4 text-base leading-7 text-muted-foreground">
-                  Let's discuss full stack roles, backend engineering opportunities, integration work, or freelance
-                  business applications.
+                  Let's discuss full stack roles, backend engineering
+                  opportunities, integration work, or freelance business
+                  applications.
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <Button asChild size="lg">
@@ -241,7 +306,7 @@ function FloatingBadge({
   return (
     <motion.div
       animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-      transition={{ duration: 5, delay, repeat: Infinity, ease: 'easeInOut' }}
+      transition={{ duration: 5, delay, repeat: Infinity, ease: "easeInOut" }}
       className={`absolute hidden rounded-md border border-primary/30 bg-background/90 px-3 py-2 text-sm font-medium text-primary shadow-[0_10px_36px_hsl(222_36%_4%/0.35)] backdrop-blur sm:block ${className}`}
     >
       {label}
@@ -263,7 +328,7 @@ function RevealSection({
       id={id}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, margin: "-80px" }}
       variants={fadeUp}
       className={className}
     >
