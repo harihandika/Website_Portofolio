@@ -64,6 +64,12 @@ async function main() {
     { name: "JWT", category: "Security", displayOrder: 8 },
     { name: "Docker", category: "DevOps", displayOrder: 9 },
     { name: "Railway", category: "Deployment", displayOrder: 10 },
+    { name: ".NET Core", category: "Backend", displayOrder: 11 },
+    { name: "Microsoft SQL Server", category: "Database", displayOrder: 12 },
+    { name: "ExpressJS", category: "Backend", displayOrder: 13 },
+    { name: "MongoDB", category: "Database", displayOrder: 14 },
+    { name: "Material UI", category: "Frontend", displayOrder: 15 },
+    { name: "Redux", category: "Frontend", displayOrder: 16 },
   ];
 
   for (const tech of techStacks) {
@@ -76,51 +82,61 @@ async function main() {
 
   const projects = [
     {
-      title: "ProcureFlow ERP",
+      title: "ProcureFlow ERP (Purchase App)",
       slug: "procureflow-erp",
-      summary:
-        "Procurement workflow platform with approvals, budget control, receiving, and ERP integration simulation.",
+      summary: "ERP-integrated procurement system with requisition, approval, and warehouse modules.",
       description:
-        "A portfolio-grade ERP procurement system designed to demonstrate backend architecture, role-based access, workflow modeling, and operational dashboards.",
+        "Developed a comprehensive Purchase application for material and non-material goods integrated with the company ERP.",
       problem:
-        "Manual procurement requests often lack approval traceability, budget visibility, and a consistent flow between request, purchase order, receiving, and ERP sync.",
+        "Required robust master data management, multi-level approvals, budget control, and field device integration for logistics.",
       solution:
-        "Built modular backend services and a structured UI for purchase requests, approvals, budget checks, receiving records, and integration events.",
+        "Implemented master data modules, packaging conversion logic, automated ERP synchronization, and field hardware integrations.",
       impact:
-        "Shows practical experience in designing enterprise workflows, normalized data models, API contracts, and maintainable full stack architecture.",
+        "Streamlined the procurement process from requisition to receiving, ensuring precise stock accuracy and budget adherence.",
       imageUrl: "https://harihandika.dev/images/projects/procureflow.jpg",
       demoUrl: "https://procureflow-demo.vercel.app",
       githubUrl: "https://github.com/harihandika/procureflow-erp",
       isFeatured: true,
       displayOrder: 1,
-      stacks: [
-        "Next.js",
-        "NestJS",
-        "TypeScript",
-        "Prisma ORM",
-        "PostgreSQL",
-        "JWT",
-      ],
+      stacks: ["Next.js", "NestJS", "TypeScript", "Prisma ORM", "PostgreSQL", "Docker"],
     },
     {
-      title: "Transfer Request Portal",
-      slug: "transfer-request-portal",
-      summary:
-        "Internal transfer request application for material order tracking and interplant delivery scheduling.",
+      title: "Individual Performance (I-Perform)",
+      slug: "individual-performance",
+      summary: "KPI tracking and performance evaluation system with employee promotion logic.",
       description:
-        "A business application for managing material transfer requests, order data, delivery schedules, and reporting workflows.",
+        "Built an internal HR system at PT Acset Indonusa to manage employee KPIs, calculate performance scores, and run background jobs for ranks.",
       problem:
-        "Operational teams needed a clearer way to create, track, and export transfer request data while reducing manual spreadsheet handling.",
+        "Manual performance evaluation processes lacked automation and real-time tracking.",
       solution:
-        "Implemented structured create-order flows, editable business fields, date-only delivery schedules, and reporting data preparation.",
+        "Developed a robust KPI calculation engine with promotion logic and scheduled background tasks using .NET Core.",
       impact:
-        "Improved clarity of transfer request records and demonstrates experience maintaining real business workflows.",
-      imageUrl: "https://harihandika.dev/images/projects/transfer-request.jpg",
+        "Automated the performance tracking cycle, increasing transparency and efficiency for HR and employees.",
+      imageUrl: "https://harihandika.dev/images/projects/i-perform.jpg",
       demoUrl: null,
       githubUrl: null,
       isFeatured: true,
       displayOrder: 2,
-      stacks: ["TypeScript", "PostgreSQL"],
+      stacks: [".NET Core", "Microsoft SQL Server"],
+    },
+    {
+      title: "Electronic Documentation (E-Doc)",
+      slug: "electronic-documentation",
+      summary: "Internal document management system with project/location-based folder access.",
+      description:
+        "Developed a secure document management platform at PT Acset Indonusa supporting permissions, hard-copy tracking, and transfer workflows.",
+      problem:
+        "Document tracking across multiple projects and locations was fragmented and lacked strict permission controls.",
+      solution:
+        "Implemented location-based access, document viewing/downloading workflows, and a physical hard-copy tracking mechanism.",
+      impact:
+        "Improved document security and tracking accuracy across all operational projects.",
+      imageUrl: "https://harihandika.dev/images/projects/e-doc.jpg",
+      demoUrl: null,
+      githubUrl: null,
+      isFeatured: true,
+      displayOrder: 3,
+      stacks: ["React", "Material UI", "Redux", "ExpressJS", "Microsoft SQL Server"],
     },
     {
       title: "Hari Handika Setiawan Portfolio",
@@ -139,17 +155,8 @@ async function main() {
       demoUrl: "https://harihandika.dev",
       githubUrl: "https://github.com/harihandika/portfolio",
       isFeatured: true,
-      displayOrder: 3,
-      stacks: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "NestJS",
-        "Prisma ORM",
-        "PostgreSQL",
-        "Railway",
-      ],
+      displayOrder: 4,
+      stacks: ["Next.js", "React", "TypeScript", "Tailwind CSS", "NestJS", "Prisma ORM", "PostgreSQL", "Railway"],
     },
   ];
 
@@ -181,96 +188,28 @@ async function main() {
   }
 
   const skills = [
-    {
-      name: "Next.js",
-      category: "Frontend",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 1,
-    },
-    {
-      name: "React",
-      category: "Frontend",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 2,
-    },
-    {
-      name: "Tailwind CSS",
-      category: "Frontend",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 3,
-    },
-    {
-      name: "Framer Motion",
-      category: "Frontend",
-      level: SkillLevel.INTERMEDIATE,
-      displayOrder: 4,
-    },
-    {
-      name: "NestJS",
-      category: "Backend",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 1,
-    },
-    {
-      name: "REST API Design",
-      category: "Backend",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 2,
-    },
-    {
-      name: "JWT Authentication",
-      category: "Backend",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 3,
-    },
-    {
-      name: "Prisma ORM",
-      category: "Database",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 1,
-    },
-    {
-      name: "PostgreSQL",
-      category: "Database",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 2,
-    },
-    {
-      name: "Schema Design",
-      category: "Database",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 3,
-    },
-    {
-      name: "Docker",
-      category: "Cloud & DevOps",
-      level: SkillLevel.INTERMEDIATE,
-      displayOrder: 1,
-    },
-    {
-      name: "Railway",
-      category: "Cloud & DevOps",
-      level: SkillLevel.INTERMEDIATE,
-      displayOrder: 2,
-    },
-    {
-      name: "Vercel",
-      category: "Cloud & DevOps",
-      level: SkillLevel.INTERMEDIATE,
-      displayOrder: 3,
-    },
-    {
-      name: "API Integration",
-      category: "Integration",
-      level: SkillLevel.ADVANCED,
-      displayOrder: 1,
-    },
-    {
-      name: "ERP Workflow Modeling",
-      category: "Integration",
-      level: SkillLevel.INTERMEDIATE,
-      displayOrder: 2,
-    },
+    { name: "Next.js", category: "Frontend", level: SkillLevel.ADVANCED, displayOrder: 1 },
+    { name: "React", category: "Frontend", level: SkillLevel.ADVANCED, displayOrder: 2 },
+    { name: "Tailwind CSS", category: "Frontend", level: SkillLevel.ADVANCED, displayOrder: 3 },
+    { name: "Framer Motion", category: "Frontend", level: SkillLevel.INTERMEDIATE, displayOrder: 4 },
+    { name: "NestJS", category: "Backend", level: SkillLevel.ADVANCED, displayOrder: 1 },
+    { name: "REST API Design", category: "Backend", level: SkillLevel.ADVANCED, displayOrder: 2 },
+    { name: "JWT Authentication", category: "Backend", level: SkillLevel.ADVANCED, displayOrder: 3 },
+    { name: "Prisma ORM", category: "Database", level: SkillLevel.ADVANCED, displayOrder: 1 },
+    { name: "PostgreSQL", category: "Database", level: SkillLevel.ADVANCED, displayOrder: 2 },
+    { name: "Schema Design", category: "Database", level: SkillLevel.ADVANCED, displayOrder: 3 },
+    { name: "Docker", category: "Cloud & DevOps", level: SkillLevel.INTERMEDIATE, displayOrder: 1 },
+    { name: "Railway", category: "Cloud & DevOps", level: SkillLevel.INTERMEDIATE, displayOrder: 2 },
+    { name: "Vercel", category: "Cloud & DevOps", level: SkillLevel.INTERMEDIATE, displayOrder: 3 },
+    { name: "Monorepo Management", category: "Cloud & DevOps", level: SkillLevel.INTERMEDIATE, displayOrder: 4 },
+    { name: "CI/CD Pipelines", category: "Cloud & DevOps", level: SkillLevel.INTERMEDIATE, displayOrder: 5 },
+    { name: "API Integration", category: "Integration", level: SkillLevel.ADVANCED, displayOrder: 1 },
+    { name: "ERP Workflow Modeling", category: "Integration", level: SkillLevel.INTERMEDIATE, displayOrder: 2 },
+    { name: "ERP System Architecture", category: "Enterprise Development", level: SkillLevel.INTERMEDIATE, displayOrder: 1 },
+    { name: "B2B Workflow Modeling", category: "Enterprise Development", level: SkillLevel.INTERMEDIATE, displayOrder: 2 },
+    { name: "Complex State Management", category: "Enterprise Development", level: SkillLevel.ADVANCED, displayOrder: 3 },
+    { name: "AI Integration", category: "AI & Data", level: SkillLevel.INTERMEDIATE, displayOrder: 1 },
+    { name: "Data Visualization", category: "AI & Data", level: SkillLevel.INTERMEDIATE, displayOrder: 2 },
   ];
 
   for (const skill of skills) {
@@ -288,36 +227,53 @@ async function main() {
 
   const experiences = [
     {
-      company: "Freelance / Portfolio Projects",
-      role: "Full Stack Developer",
-      location: "Remote",
-      startDate: new Date("2024-01-01"),
+      company: "PT FTS Automotive Indonesia",
+      role: "Software Engineer - Purchase",
+      location: "Indonesia",
+      startDate: new Date("2025-07-01"),
       endDate: null,
       isCurrent: true,
       description:
-        "Designing and building full stack business applications, portfolio systems, API integrations, and backend-focused case studies.",
+        "Develop and maintain a Purchase application for material and non-material goods integrated with company ERP.",
       achievements: [
-        "Built portfolio-grade applications using Next.js, NestJS, Prisma, and PostgreSQL.",
-        "Designed normalized database schemas for admin-managed content and business workflows.",
-        "Implemented JWT-based admin authentication and backend service structure.",
+        "Implemented master data modules with validation, versioning, and audit trails.",
+        "Built multi-level role-based approval workflows for requisitions and POs.",
+        "Developed budget management and cost-center setup with overspend alerts.",
+        "Integrated field devices (barcode scanners, cameras) for receiving and picking.",
       ],
       displayOrder: 1,
     },
     {
-      company: "Internal Business Application Project",
-      role: "Backend and Web Application Developer",
+      company: "PT Acset Indonusa Tbk (Member of Astra)",
+      role: "Fullstack Developer",
       location: "Indonesia",
-      startDate: new Date("2023-01-01"),
-      endDate: new Date("2023-12-31"),
+      startDate: new Date("2023-08-01"),
+      endDate: new Date("2025-07-01"),
       isCurrent: false,
       description:
-        "Maintained operational web application flows for material transfer requests, delivery schedule data, and reporting needs.",
+        "Developed and maintained internal enterprise applications: E-Doc, I-Perform, Portal Inovasi, Portal API, and E-Permit.",
       achievements: [
-        "Improved create-order data flow and user-editable business fields.",
-        "Added date-only delivery schedule support across UI, DTO, entity, service, and reporting layers.",
-        "Resolved modal and navigation state issues in shared user flows.",
+        "Implemented cross-functional features using ReactJS, TypeScript, Java Spring Boot, and .NET.",
+        "Deployed applications to Linux/Windows servers using Docker, NGINX, and GitLab CI/CD.",
+        "Managed application data workflows across SQL Server, PostgreSQL, and MongoDB.",
       ],
       displayOrder: 2,
+    },
+    {
+      company: "PT Integrasi Logistic Cipta Solusi",
+      role: "Fullstack Developer",
+      location: "Indonesia",
+      startDate: new Date("2022-10-01"),
+      endDate: new Date("2023-09-01"),
+      isCurrent: false,
+      description:
+        "Improved logistics web applications for document tracking, truck assignments, and operational workflows.",
+      achievements: [
+        "Performed bug fixing, application monitoring, and manual database patching.",
+        "Implemented robust frontend and backend architectures using TypeScript, Material UI, and ExpressJS.",
+        "Monitored application health using Prometheus and Grafana.",
+      ],
+      displayOrder: 3,
     },
   ];
 
