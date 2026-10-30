@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 
 type PageTransitionProps = {
   children: ReactNode;
@@ -13,8 +14,8 @@ export function PageTransition({ children }: PageTransitionProps) {
   return (
     <motion.div
       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-      animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.32, ease: 'easeOut' }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: reduceMotion ? 0 : 0.32, ease: "easeOut" }}
     >
       {children}
     </motion.div>

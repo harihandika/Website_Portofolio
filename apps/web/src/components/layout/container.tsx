@@ -8,7 +8,7 @@ type ContainerProps = React.HTMLAttributes<HTMLDivElement> & {
 const sizeClassName = {
   sm: 'max-w-3xl',
   md: 'max-w-5xl',
-  lg: 'max-w-6xl',
+  lg: 'max-w-7xl',
   xl: 'max-w-7xl',
 };
 

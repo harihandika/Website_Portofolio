@@ -4,26 +4,26 @@
 
 :root {
   color-scheme: dark;
-  --background: 222 38% 7%;
-  --foreground: 210 40% 96%;
-  --card: 222 32% 9%;
-  --card-foreground: 210 40% 96%;
-  --popover: 222 32% 9%;
-  --popover-foreground: 210 40% 96%;
-  --primary: 188 86% 48%;
-  --primary-foreground: 222 36% 7%;
-  --secondary: 218 18% 18%;
-  --secondary-foreground: 210 40% 96%;
-  --muted: 218 18% 16%;
-  --muted-foreground: 215 16% 70%;
-  --accent: 210 92% 62%;
-  --accent-foreground: 222 36% 7%;
+  --background: 220 16% 5%;
+  --foreground: 210 20% 96%;
+  --card: 220 12% 8%;
+  --card-foreground: 210 20% 96%;
+  --popover: 220 12% 9%;
+  --popover-foreground: 210 20% 96%;
+  --primary: 184 95% 60%;
+  --primary-foreground: 220 30% 6%;
+  --secondary: 220 10% 13%;
+  --secondary-foreground: 210 20% 96%;
+  --muted: 220 10% 12%;
+  --muted-foreground: 218 10% 63%;
+  --accent: 202 96% 70%;
+  --accent-foreground: 220 30% 6%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 210 40% 98%;
-  --border: 217 18% 20%;
-  --input: 217 18% 20%;
-  --ring: 174 72% 45%;
-  --radius: 0.5rem;
+  --border: 220 10% 17%;
+  --input: 220 10% 20%;
+  --ring: 184 95% 60%;
+  --radius: 0.875rem;
 }
 
 * {
@@ -34,44 +34,59 @@ html {
   min-height: 100%;
   background: hsl(var(--background));
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
 }
 
 body {
   min-height: 100%;
   margin: 0;
-  background:
-    linear-gradient(120deg, hsl(188 86% 18% / 0.18), transparent 42%),
-    linear-gradient(135deg, hsl(222 38% 7%), hsl(222 30% 8%) 46%, hsl(215 26% 10%));
+  background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-feature-settings:
     "rlig" 1,
     "calt" 1;
   font-family: Inter, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 5px;
+}
+
+main:focus {
+  outline: none;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px hsl(var(--foreground) / 0.4);
+}
+
+.section-rule {
+  border-top: 1px solid hsl(var(--foreground) / 0.08);
 }
 
 .surface-grid {
   background-image:
     linear-gradient(hsl(var(--border) / 0.22) 1px, transparent 1px),
     linear-gradient(90deg, hsl(var(--border) / 0.18) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, black, transparent 78%);
-  animation: grid-drift 22s linear infinite;
 }
 
 .accent-glow {
-  box-shadow: 0 0 40px hsl(var(--primary) / 0.14);
+  box-shadow: 0 0 48px hsl(var(--primary) / 0.1);
 }
 
 .animated-gradient {
   background:
-    radial-gradient(circle at 18% 18%, hsl(var(--primary) / 0.2), transparent 28%),
-    radial-gradient(circle at 82% 28%, hsl(var(--accent) / 0.16), transparent 30%),
-    linear-gradient(120deg, hsl(var(--primary) / 0.12), transparent 34%),
-    linear-gradient(240deg, hsl(var(--accent) / 0.1), transparent 38%),
+    radial-gradient(circle at 18% 18%, hsl(var(--primary) / 0.07), transparent 32%),
+    radial-gradient(circle at 82% 28%, hsl(var(--accent) / 0.05), transparent 36%),
     hsl(var(--background) / 0.2);
-  background-size: 140% 140%, 150% 150%, 180% 180%, 180% 180%;
-  animation: portfolio-gradient 14s ease-in-out infinite;
+  background-size: 140% 140%, 150% 150%;
+  animation: portfolio-gradient 18s ease-in-out infinite;
 }
 
 .shine-effect {

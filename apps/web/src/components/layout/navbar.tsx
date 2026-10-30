@@ -3,9 +3,10 @@
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Download, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,121 +18,128 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const mobileNavigation = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateScrollState = () => setIsScrolled(window.scrollY > 12);
-
     updateScrollState();
     window.addEventListener("scroll", updateScrollState, { passive: true });
-
     return () => window.removeEventListener("scroll", updateScrollState);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? "hidden" : "";
+    setIsMobileOpen(false);
+  }, [pathname]);
 
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileOpen(false);
+        menuButton.current?.focus();
+      }
+      if (event.key === "Tab") {
+        const links = Array.from(mobileNavigation.current?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []);
+        const first = menuButton.current;
+        const last = links.at(-1);
+        if (event.shiftKey && document.activeElement === first && last) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last && first) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setIsMobileOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
     };
   }, [isMobileOpen]);
+
+  const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-300",
-        isScrolled &&
-          "border-border/70 bg-background/78 shadow-[0_12px_36px_hsl(222_36%_4%/0.32)] backdrop-blur-xl",
+        "fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-background/90 transition-colors duration-300 backdrop-blur-xl",
+        isScrolled && "bg-background/95 shadow-[0_8px_36px_rgba(0,0,0,0.2)]",
       )}
     >
-      <Container className="flex h-16 items-center justify-between">
-        <Link
-          href="/"
-          className="group inline-flex items-center gap-3 font-semibold text-foreground"
-          onClick={() => setIsMobileOpen(false)}
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-md border border-primary/30 bg-primary/10 text-sm text-primary shadow-[0_0_30px_hsl(var(--primary)/0.16)]">
-            HH
+      <Container className="flex h-20 items-center justify-between gap-6">
+        <Link href="/" className="group flex shrink-0 items-center gap-3" aria-label="Hari Handika Setiawan — home" onClick={() => setIsMobileOpen(false)}>
+          <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/25 bg-primary/[0.06] text-xl font-bold tracking-[-0.12em] text-foreground transition-colors group-hover:border-primary/60">
+            h<span className="pr-0.5 text-primary">/</span>
           </span>
-          <span>Hari Handika Setiawan</span>
+          <span className="text-[17px] font-bold tracking-[-0.06em] text-foreground">harihandika<span className="text-primary">.</span></span>
         </Link>
 
-        <nav
-          className="hidden items-center gap-7 lg:flex"
-          aria-label="Primary navigation"
-        >
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex" aria-label="Primary navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={cn(
+                "group relative py-2 text-xs font-medium transition-colors hover:text-foreground",
+                isActive(link.href) ? "text-foreground" : "text-muted-foreground",
+              )}
             >
               {link.label}
-              <span className="absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.45)] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              <span className={cn("absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary transition-opacity", isActive(link.href) ? "opacity-100" : "opacity-0 group-hover:opacity-100")} />
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Button asChild size="sm">
-            <Link href="/assets/CV Hari_Handika_Setiawan.pdf" target="_blank">
-              <Download className="h-4 w-4" />
-              Download CV
-            </Link>
-          </Button>
-        </div>
+        <Button asChild size="sm" variant="outline" className="hidden border-white/15 bg-transparent lg:inline-flex">
+          <Link href="/assets/CV Hari_Handika_Setiawan.pdf" target="_blank" rel="noopener noreferrer">
+            Resume <Download className="h-3.5 w-3.5" />
+          </Link>
+        </Button>
 
         <Button
+          ref={menuButton}
           type="button"
-          variant="ghost"
+          variant="outline"
           size="icon"
           className="lg:hidden"
-          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-controls="mobile-navigation"
           aria-expanded={isMobileOpen}
           onClick={() => setIsMobileOpen((current) => !current)}
         >
-          {isMobileOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
+          {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
       </Container>
 
-      <div
-        className={cn(
-          "grid border-t border-border/70 bg-background/96 backdrop-blur-xl transition-all duration-300 lg:hidden",
-          isMobileOpen
-            ? "grid-rows-[1fr]"
-            : "grid-rows-[0fr] border-transparent",
-        )}
-      >
-        <div className="overflow-hidden">
-          <Container className="flex flex-col gap-1 py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                onClick={() => setIsMobileOpen(false)}
-              >
-                {link.label}
+      {isMobileOpen && (
+        <div className="absolute inset-x-0 top-full lg:hidden">
+          <button className="absolute inset-x-0 top-0 -z-10 h-[calc(100dvh-5rem)] bg-black/70 backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} tabIndex={-1} aria-label="Close navigation menu" />
+          <nav ref={mobileNavigation} id="mobile-navigation" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-white/10 bg-background px-6 pb-8 pt-4" aria-label="Mobile navigation">
+            {navLinks.map((link, index) => (
+              <Link key={link.href} href={link.href} aria-current={isActive(link.href) ? "page" : undefined} className={cn("group flex items-center justify-between border-b border-white/[0.06] py-4 text-2xl font-medium tracking-tight", isActive(link.href) ? "text-primary" : "text-foreground")} onClick={() => setIsMobileOpen(false)}>
+                <span><span className="mr-4 align-middle font-mono text-[10px] text-muted-foreground">0{index + 1}</span>{link.label}</span>
+                <ArrowUpRight className="h-5 w-5 text-muted-foreground" />
               </Link>
             ))}
-            <Button asChild className="mt-3 w-full">
-              <Link
-                href="/assets/CV Hari_Handika_Setiawan.pdf"
-                target="_blank"
-                onClick={() => setIsMobileOpen(false)}
-              >
-                <Download className="h-4 w-4" />
-                Download CV
-              </Link>
+            <Button asChild className="mt-6 w-full">
+              <Link href="/assets/CV Hari_Handika_Setiawan.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileOpen(false)}><Download className="h-4 w-4" /> Download resume</Link>
             </Button>
-          </Container>
+          </nav>
         </div>
-      </div>
+      )}
     </header>
   );
 }
