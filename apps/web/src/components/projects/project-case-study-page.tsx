@@ -16,6 +16,7 @@ import {
   RotateCw,
   Star,
   Target,
+  Workflow,
 } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { ErrorState } from "@/components/states/error-state";
@@ -25,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProjectArtwork } from "./project-artwork";
 import { fetchProjectBySlug, type ProjectData } from "@/lib/data/projects";
+import { operationalFlows } from "@/lib/data/operational-flows";
 import { fadeUp, pageTransition, staggerContainer } from "@/lib/motion";
 
 type ProjectDetailStatus = "loading" | "success" | "error";
@@ -129,6 +131,7 @@ export function ProjectCaseStudyPage({ slug }: { slug: string }) {
 
 function CaseStudyContent({ project }: { project: ProjectData }) {
   const reduceMotion = useReducedMotion();
+  const flow = operationalFlows.find((item) => item.slug === project.slug);
   const architecturePoints = useMemo(
     () => buildArchitecturePoints(project),
     [project],
@@ -163,6 +166,13 @@ function CaseStudyContent({ project }: { project: ProjectData }) {
             {project.summary}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
+            {flow && (
+              <Button asChild variant="outline">
+                <Link href={"/system-map#" + flow.slug}>
+                  <Workflow className="h-4 w-4" /> View on system map
+                </Link>
+              </Button>
+            )}
             {project.githubUrl ? (
               <Button asChild>
                 <Link href={project.githubUrl} target="_blank" rel="noreferrer">
@@ -198,6 +208,38 @@ function CaseStudyContent({ project }: { project: ProjectData }) {
           <CaseStudySection title="03 / The approach" icon={Code2}>
             <p>{project.solution}</p>
           </CaseStudySection>
+
+          {flow && (
+            <CaseStudySection title="Operational flow" icon={Workflow}>
+              <p>{flow.description}</p>
+              <ol className="mt-5 divide-y divide-border border-y border-border">
+                {flow.steps.map(({ owner, title, detail }, index) => (
+                  <li
+                    key={title}
+                    className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-4"
+                  >
+                    <span className="font-mono text-xs text-primary">
+                      0{index + 1}
+                    </span>
+                    <div>
+                      <p className="mb-1 text-xs text-muted-foreground">{owner}</p>
+                      <h3 className="font-semibold text-foreground">{title}</h3>
+                      <p className="mt-1">{detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <dl className="mt-4 grid gap-3 sm:grid-cols-2" aria-label="Exception paths">
+                {flow.exceptions.map(({ title, detail }) => (
+                  <div key={title} className="border-l-2 border-primary/60 pl-3">
+                    <dt className="font-semibold text-foreground">{title}</dt>
+                    <dd className="mt-1 text-sm">{detail}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-4 text-sm">{flow.boundary}</p>
+            </CaseStudySection>
+          )}
 
           <CaseStudySection title="04 / Built with" icon={Network}>
             <div className="grid gap-4 md:grid-cols-3">

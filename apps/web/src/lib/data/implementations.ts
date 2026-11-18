@@ -1,0 +1,90 @@
+import type { ProjectData } from "./projects";
+
+const records = [
+  [
+    "mcframe-movement",
+    "Transfer Request / MCFrame Movement",
+    "Warehouse",
+    "Material requests and warehouse preparation across plants P1-P4.",
+    "Map departments, lines and warehouses to the correct ERP movement.",
+    "Connect transfer requests to MCFrame movement mapping and quantity validation.",
+    "Activation remains subject to validation.",
+    "MCFrame,Warehouse mapping,ERP movements",
+  ],
+  [
+    "dekidaka",
+    "DekiDaka Production",
+    "Manufacturing",
+    "Production planning, shift reporting, approvals and quality inspection.",
+    "Convert scanner and sensor data to quantities that users can review.",
+    "Integrate shop-floor devices and test the Modbus counter-to-quantity conversion.",
+    "Basic counter-to-quantity testing passed. The i-Report is pending UAT.",
+    "Modbus RTU,PLC sensors,Production reporting",
+  ],
+  [
+    "purchasing-accounting",
+    "Purchasing & Accounting",
+    "Procurement",
+    "Requisitions and purchase orders connected to budgets and cost centers.",
+    "Align purchase approvals with spending limits and accounting mappings.",
+    "Apply role-based routing, budget controls and ERP transaction validation.",
+    "The workflow covers requests, purchasing decisions and budget monitoring.",
+    "Approvals,Budget controls,ERP validation",
+  ],
+  [
+    "supplier-portal",
+    "Supplier Portal",
+    "Procurement",
+    "Supplier coordination around purchase orders, deliveries and receiving.",
+    "Purchasing and receiving need a common reference for supplier orders and deliveries.",
+    "Support supplier-facing interactions in purchasing, with delivery and receipt handoffs shown in the workflow below.",
+    "The portal supports supplier coordination. Invoice review is shown as business context, not as an automated portal feature.",
+    "Supplier workflows,Purchasing",
+  ],
+  [
+    "warehouse-module",
+    "Warehouse Module",
+    "Warehouse",
+    "Material requests, stock transfers, unit conversion and location mapping.",
+    "A material request must resolve to the correct warehouse, stock quantity and unit before a movement is recorded.",
+    "Map departments, lines and warehouse locations, check unit conversions, and validate quantities through requests and stock transfers.",
+    "The module supports material requests, stock transactions and movement reconciliation. Transfer activation remains subject to validation.",
+    "Inventory,Stock transfers",
+  ],
+  [
+    "maintenance-module",
+    "Maintenance Module",
+    "Manufacturing",
+    "Plant maintenance coordination, progress tracking and spare-parts handoffs.",
+    "Plant teams need visibility into ongoing work and dependencies such as spare-parts availability.",
+    "Organize maintenance activities and expose their status. The conceptual flow covers preventive and breakdown maintenance.",
+    "Plant users can coordinate activities and follow their status; spare-parts procurement and inventory transactions are outside this case study's scope.",
+    "Plant maintenance,Activity tracking",
+  ],
+] as const;
+
+export const cvProjects: ProjectData[] = records.map(
+  (
+    [slug, title, category, summary, problem, solution, impact, tags],
+    displayOrder,
+  ) => ({
+    id: slug,
+    slug,
+    title,
+    summary,
+    description: summary,
+    problem,
+    solution,
+    impact,
+    displayOrder,
+    isFeatured: displayOrder < 3,
+    imageUrl: null,
+    demoUrl: null,
+    githubUrl: null,
+    createdAt: "",
+    updatedAt: "",
+    techStacks: tags
+      .split(",")
+      .map((name, i) => ({ id: slug + i, name, category, displayOrder: i })),
+  }),
+);

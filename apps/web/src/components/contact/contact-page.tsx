@@ -140,6 +140,14 @@ export function ContactPage({ profile }: ContactPageProps) {
                 {profile.location ?? "Indonesia / Remote"}
               </div>
               <div className="mt-7 flex flex-wrap gap-3">
+                {profile.phone && (
+                  <a
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2.5 text-xs text-muted-foreground hover:text-primary"
+                    href={"tel:" + profile.phone.replace(/[^+0-9]/g, "")}
+                  >
+                    {profile.phone}
+                  </a>
+                )}
                 {profile.githubUrl ? (
                   <a
                     href={profile.githubUrl}

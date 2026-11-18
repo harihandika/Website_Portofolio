@@ -36,14 +36,14 @@ const highlights = [
     description:
       "Carefully modeled relationships and queries that keep operational information useful and consistent.",
     icon: Database,
-    detail: "PostgreSQL / Prisma / Data integrity",
+    detail: "PostgreSQL / SQL Server / Data integrity",
   },
   {
     title: "End-to-end delivery",
     description:
       "From the first database table to the interface people use every day. One coherent experience.",
     icon: Layers3,
-    detail: "Next.js / Responsive UI / Deployment",
+    detail: "React / Spring Boot / GitLab CI/CD",
   },
 ];
 

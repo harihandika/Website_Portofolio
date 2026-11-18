@@ -1,10 +1,12 @@
 import { PublicLayout } from "@/components/layout/public-layout";
 import "./globals.css";
+import "@fontsource-variable/space-grotesk";
+import "./workshop.css";
 
 export const metadata = {
-  title: "Hari Handika Setiawan",
+  title: "Hari Handika Setiawan | Software Engineer",
   description:
-    "Personal portfolio and interactive CV for Hari Handika Setiawan.",
+    "Explore Hari Handika Setiawan's experience connecting MCFrame ERP, manufacturing systems and shop-floor devices in North Jakarta.",
 };
 
 export default function RootLayout({

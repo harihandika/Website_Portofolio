@@ -1,3 +1,5 @@
+import { cvProjects } from "./cv";
+
 export type ProjectTechStackData = {
   id: string;
   name: string;
@@ -24,31 +26,48 @@ export type ProjectData = {
   updatedAt: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api";
 
-export async function fetchProjects(signal?: AbortSignal): Promise<ProjectData[]> {
+export async function fetchProjects(
+  signal?: AbortSignal,
+): Promise<ProjectData[]> {
+  if (process.env.NEXT_PUBLIC_PORTFOLIO_SOURCE !== "api") return cvProjects;
   const response = await fetch(`${API_URL}/projects`, {
-    cache: 'no-store',
+    cache: "no-store",
     signal,
   });
 
   if (!response.ok) {
-    throw new Error('Unable to fetch projects from the portfolio API.');
+    throw new Error("Unable to fetch projects from the portfolio API.");
   }
 
   const projects = (await response.json()) as ProjectData[];
 
-  return [...projects].sort((left, right) => left.displayOrder - right.displayOrder || left.title.localeCompare(right.title));
+  return [...projects].sort(
+    (left, right) =>
+      left.displayOrder - right.displayOrder ||
+      left.title.localeCompare(right.title),
+  );
 }
 
-export async function fetchProjectBySlug(slug: string, signal?: AbortSignal): Promise<ProjectData> {
-  const response = await fetch(`${API_URL}/projects/${encodeURIComponent(slug)}`, {
-    cache: 'no-store',
-    signal,
-  });
+export async function fetchProjectBySlug(
+  slug: string,
+  signal?: AbortSignal,
+): Promise<ProjectData> {
+  const local = cvProjects.find((project) => project.slug === slug);
+  if (process.env.NEXT_PUBLIC_PORTFOLIO_SOURCE !== "api" && local) return local;
+  const response = await fetch(
+    `${API_URL}/projects/${encodeURIComponent(slug)}`,
+    {
+      cache: "no-store",
+      signal,
+    },
+  );
 
   if (!response.ok) {
-    throw new Error('Unable to fetch project case study from the portfolio API.');
+    throw new Error(
+      "Unable to fetch project case study from the portfolio API.",
+    );
   }
 
   return (await response.json()) as ProjectData;

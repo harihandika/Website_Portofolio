@@ -4,6 +4,10 @@ Panduan ini menjelaskan cara menggunakan, menjalankan, melakukan migrasi databas
 
 ## Ringkasan Aplikasi
 
+Tampilan publik kini menggunakan CV Hari sebagai sumber bawaan. Jalankan `npm install` dan `npm run dev` dari `apps/web` untuk membuka portfolio tanpa database. Beranda mencakup lengan robot 3D, indeks implementasi ERP, pengalaman, keahlian, pendidikan dan unduhan PDF. Formulir pesan dan halaman admin tetap memerlukan API.
+
+Data CV berada di `apps/web/src/lib/data/cv.ts`, dan enam studi implementasi di `apps/web/src/lib/data/implementations.ts`. PDF terbaru tersedia di `apps/web/public/assets/Hari-Handika-Setiawan-CV.pdf`. Untuk memakai data publik yang dikelola admin, atur `NEXT_PUBLIC_PORTFOLIO_SOURCE=api` di `apps/web/.env.local`, lalu jalankan ulang frontend (build ulang untuk produksi).
+
 Aplikasi ini terdiri dari dua bagian:
 
 - `apps/api`: backend NestJS, Prisma ORM, PostgreSQL, JWT, bcrypt.
@@ -399,6 +403,10 @@ npm run start:dev
 8. Test dari frontend atau API client.
 
 ## Deployment Singkat
+
+Bagikan [Manufacturing Systems Map](https://hari-handika-system-map.vercel.app/) atau gunakan **Copy public link** di `/system-map`. Tautan mempertahankan bagian alur yang dibuka dari diagram. Gunakan **Print / PDF** untuk menyimpan salinan. Situs publik menampilkan versi mandiri peta dan tiga alur konseptual. Perubahan lokal memerlukan penerbitan ulang situs mandiri.
+
+Untuk deployment frontend portofolio di Vercel, pilih `apps/web` sebagai Root Directory, gunakan preset Next.js, dan biarkan `NEXT_PUBLIC_PORTFOLIO_SOURCE` kosong atau bernilai `cv`. Peta dan studi kasus bawaan dapat digunakan tanpa backend.
 
 Backend Railway:
 
